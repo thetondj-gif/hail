@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "capability_id": "dawn-outreach-command",
+  "source_repository": "thetondj-gif/hail",
+  "workstream_branch": "dawn/capability-foundry-wave-1",
+  "status": "RESEARCHED",
+  "purpose": "Prepare a compliance-gated adapter for approved email, SMS and voice outreach without enabling live sending in Wave 1.",
+  "integration_mode": "isolated-communications-service",
+  "read_write_classification": "external-write-capable-disabled",
+  "required_credentials": [],
+  "network_access": "disabled-by-default",
+  "persistent_ports": [],
+  "risk_rating": "high",
+  "allowed_operations": [
+    "validate_campaign_contract",
+    "validate_recipient_authority",
+    "generate_channel_payload",
+    "simulate_send",
+    "produce_compliance_evidence"
+  ],
+  "prohibited_operations": [
+    "live_email_send",
+    "live_sms_send",
+    "live_voice_call",
+    "suppression_bypass",
+    "unapproved_recipient_contact",
+    "production_runtime_activation"
+  ],
+  "dawn_v2_rebuild_separated": true,
+  "connected_to_dawn": false,
+  "production_verified": false
+}

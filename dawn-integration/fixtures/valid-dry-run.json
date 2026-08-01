@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "dry_run": true,
+  "provider_credentials_present": false,
+  "campaign_approved": true,
+  "recipient_approved": true,
+  "suppression_checked": true,
+  "suppressed": false,
+  "content_approved": true,
+  "channel": "email",
+  "lawful_basis": "legitimate-interest-reviewed",
+  "authority_evidence_ref": "evidence/campaign-approval-demo.md",
+  "suppression_evidence_ref": "evidence/suppression-check-demo.md",
+  "cost_ceiling": 0.25,
+  "sending_window": {
+    "start": "2026-08-03T09:00:00+01:00",
+    "end": "2026-08-03T17:00:00+01:00"
+  }
+}
