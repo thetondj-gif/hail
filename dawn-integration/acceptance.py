@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Offline no-send acceptance for the DAWN Hail communications adapter."""
 from __future__ import annotations
 
@@ -10,7 +9,12 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parent
 CHANNELS = {"email", "sms", "voice"}
-LAWFUL_BASES = {"consent", "contract", "legitimate-interest-reviewed", "existing-customer-service"}
+LAWFUL_BASES = {
+    "consent",
+    "contract",
+    "legitimate-interest-reviewed",
+    "existing-customer-service",
+}
 
 
 def validate(request: dict[str, Any]) -> list[str]:
@@ -21,7 +25,12 @@ def validate(request: dict[str, Any]) -> list[str]:
         errors.append("dry_run_required")
     if request.get("provider_credentials_present") is not False:
         errors.append("credentials_prohibited_in_canary")
-    for field in ("campaign_approved", "recipient_approved", "suppression_checked", "content_approved"):
+    for field in (
+        "campaign_approved",
+        "recipient_approved",
+        "suppression_checked",
+        "content_approved",
+    ):
         if request.get(field) is not True:
             errors.append(field)
     if request.get("suppressed") is not False:
@@ -37,7 +46,11 @@ def validate(request: dict[str, Any]) -> list[str]:
     ceiling = request.get("cost_ceiling")
     if not isinstance(ceiling, (int, float)) or not 0 <= ceiling <= 5:
         errors.append("cost_ceiling")
-    window = request.get("sending_window") if isinstance(request.get("sending_window"), dict) else {}
+    window = (
+        request.get("sending_window")
+        if isinstance(request.get("sending_window"), dict)
+        else {}
+    )
     try:
         start = datetime.fromisoformat(str(window.get("start")))
         end = datetime.fromisoformat(str(window.get("end")))
@@ -50,13 +63,21 @@ def validate(request: dict[str, Any]) -> list[str]:
 
 def evaluate(request: dict[str, Any]) -> dict[str, Any]:
     errors = validate(request)
+    evidence_refs = (
+        request.get("authority_evidence_ref"),
+        request.get("suppression_evidence_ref"),
+    )
     return {
         "schema_version": 1,
         "capability": "dawn-governed-outreach",
         "operation": f"prepare-{request.get('channel', 'unknown')}",
         "status": "blocked" if errors else "success",
-        "evidence": [ref for ref in (request.get("authority_evidence_ref"), request.get("suppression_evidence_ref")) if ref] if not errors else [],
-        "data": {"payload_prepared": not errors, "message_sent": False, "call_started": False},
+        "evidence": [ref for ref in evidence_refs if ref] if not errors else [],
+        "data": {
+            "payload_prepared": not errors,
+            "message_sent": False,
+            "call_started": False,
+        },
         "warnings": errors,
         "cost": {"currency": "USD", "estimated": 0},
         "external_actions_performed": False,
