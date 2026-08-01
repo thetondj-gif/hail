@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "dry_run": false,
+  "provider_credentials_present": true,
+  "campaign_approved": false,
+  "recipient_approved": false,
+  "suppression_checked": false,
+  "suppressed": true,
+  "content_approved": false,
+  "channel": "whatsapp",
+  "lawful_basis": "unknown",
+  "authority_evidence_ref": "",
+  "suppression_evidence_ref": "",
+  "cost_ceiling": 50,
+  "sending_window": {
+    "start": "2026-08-03T17:00:00+01:00",
+    "end": "2026-08-03T09:00:00+01:00"
+  }
+}
