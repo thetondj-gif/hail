@@ -1,3 +1,4 @@
+# fmt: off
 """Offline no-send acceptance for the DAWN Hail communications adapter."""
 from __future__ import annotations
 
